@@ -167,50 +167,53 @@
   #invitation { display:none; }
   #invitation.visible { display:block; }
 
-  /* ── HERO ──────────────────────────────────────────── */
+  /* ── HERO (FULL SCREEN FIRST SLIDE) ────────────────── */
   .hero {
     position:relative;
     background:var(--cream);
     display:flex;
     justify-content:center;
     align-items:center;
-    min-height:480px;
+    min-height:100vh;
+    padding:60px 20px;
+    box-sizing:border-box;
   }
-  @media(max-width:640px){ .hero { min-height:360px; } }
+  @media(max-width:640px){ .hero { min-height:100vh; } }
 
   /* Center hero content */
   .hero-content {
     position:relative; z-index:4;
     text-align:center;
-    padding:60px 20px 54px;
-    max-width:680px;
+    padding:40px 20px;
+    max-width:700px;
     width:100%;
   }
   .hero-pre {
     font-family:'Cinzel',serif;
-    font-size:clamp(.55rem,1.6vw,.7rem);
-    letter-spacing:.3em; color:var(--gold);
-    margin-bottom:18px; display:block;
+    font-size:clamp(.72rem,2vw,.88rem);
+    letter-spacing:.32em; color:var(--gold);
+    margin-bottom:20px; display:block;
+    font-weight:600;
   }
   .hero-names {
     font-family:'Great Vibes',cursive;
-    font-size:clamp(2.8rem,9vw,5rem);
+    font-size:clamp(3.2rem,10vw,5.6rem);
     color:var(--pink); line-height:1.1;
-    margin-bottom:14px;
+    margin-bottom:16px;
   }
   .hero-names .amp {
-    font-size:clamp(1.6rem,5vw,2.8rem);
+    font-size:clamp(1.8rem,6vw,3.2rem);
     color:var(--pink-lt); display:block; margin:4px 0;
   }
   .hero-divrow {
-    display:flex; align-items:center; gap:10px;
-    max-width:280px; margin:0 auto 16px;
+    display:flex; align-items:center; gap:12px;
+    max-width:300px; margin:0 auto 20px;
   }
   .hero-dl { flex:1; height:1px; background:var(--border); }
-  .hero-fleuron { color:var(--gold-lt); font-size:1rem; }
+  .hero-fleuron { color:var(--gold-lt); font-size:1.1rem; }
   .hero-tag {
-    color:var(--warm-lt); font-size:clamp(.8rem,2.2vw,.95rem);
-    font-style:italic; line-height:1.7;
+    color:var(--warm-lt); font-size:clamp(1rem,2.5vw,1.18rem);
+    font-style:italic; line-height:1.75;
   }
 
   /* Page background behind hero */
@@ -219,29 +222,30 @@
     background:linear-gradient(180deg, var(--cream) 0%, var(--cream-dk) 100%);
   }
 
-  /* ── BAND DIVIDER ──────────────────────────────────── */
+  /* ── BAND DIVIDER (EXPANDED GAP BETWEEN SECTIONS) ─── */
   .band {
-    height:2px;
+    height:6px;
+    margin:40px 0;
     background:linear-gradient(to right,transparent,var(--pink-lt),var(--gold-lt),var(--pink-lt),transparent);
   }
 
-  /* ── SECTION PRESENTATION & SNAP SCROLL ────────────── */
+  /* ── SECTION PRESENTATION & SPACED LAYOUT ──────────── */
   .inv-section {
     background:var(--cream);
-    padding:80px 20px;
-    min-height:90vh;
+    padding:110px 24px;
+    min-height:95vh;
     display:flex;
     align-items:center;
     justify-content:center;
     position:relative;
     overflow:hidden;
-    scroll-margin-top:20px;
+    margin:20px 0;
   }
   .inv-section.alt { background:var(--cream-dk); }
 
   .inv-section .inner {
     position:relative; z-index:1;
-    max-width:700px;
+    max-width:720px;
     width:100%;
     margin:0 auto;
     text-align:center;
@@ -277,15 +281,16 @@
   .fam-col:first-child { text-align:right; }
   .fam-col:last-child  { text-align:left; }
   .fam-head {
-    font-family:'Cinzel',serif; font-size:clamp(.65rem,1.8vw,.78rem);
-    letter-spacing:.18em; color:var(--gold); display:block; margin-bottom:8px;
+    font-family:'Cinzel',serif; font-size:clamp(.78rem,2vw,.92rem);
+    letter-spacing:.2em; color:var(--gold); display:block; margin-bottom:10px;
+    font-weight:600;
   }
   .fam-role {
-    font-size:clamp(.7rem,1.8vw,.82rem);
-    color:var(--warm-lt); display:block; margin-bottom:2px;
+    font-size:clamp(.82rem,2vw,.96rem);
+    color:var(--warm-lt); display:block; margin-bottom:3px;
   }
   .fam-name {
-    font-size:clamp(.9rem,2.4vw,1.1rem);
+    font-size:clamp(1.05rem,2.8vw,1.3rem);
     color:var(--pink); font-weight:600; line-height:1.6; display:block;
   }
   .fam-div {
@@ -294,32 +299,33 @@
 
   /* Couple announce strip */
   .announce {
-    margin-top:36px; padding:24px;
-    border:1px solid var(--border); border-radius:8px;
-    background:rgba(200,90,122,.04);
+    margin-top:40px; padding:28px 20px;
+    border:1px solid var(--border); border-radius:10px;
+    background:rgba(200,90,122,.05);
   }
   .announce p {
     font-family:'Cinzel',serif;
-    font-size:clamp(.68rem,1.9vw,.85rem);
-    letter-spacing:.16em; color:var(--warm);
-    line-height:2.1;
+    font-size:clamp(.78rem,2.2vw,.96rem);
+    letter-spacing:.18em; color:var(--warm);
+    line-height:2.2;
+    font-weight:600;
   }
   .announce .script-duo {
-    margin-top:18px; display:flex;
-    flex-direction:column; align-items:center; gap:4px;
+    margin-top:20px; display:flex;
+    flex-direction:column; align-items:center; gap:6px;
   }
   .sname {
     font-family:'Great Vibes',cursive;
-    font-size:clamp(2.2rem,6.5vw,3.2rem);
+    font-size:clamp(2.5rem,7.5vw,3.6rem);
     color:var(--pink); line-height:1.15;
   }
   .srole {
-    font-family:'Cinzel',serif; font-size:clamp(.55rem,1.5vw,.7rem);
-    letter-spacing:.28em; color:var(--gold);
+    font-family:'Cinzel',serif; font-size:clamp(.65rem,1.8vw,.8rem);
+    letter-spacing:.3em; color:var(--gold); font-weight:600;
   }
   .samp {
     font-family:'Great Vibes',cursive;
-    font-size:clamp(1.4rem,4.5vw,2.2rem);
+    font-size:clamp(1.6rem,5vw,2.4rem);
     color:var(--pink-lt); line-height:1;
   }
 
@@ -941,41 +947,39 @@
   }
 })();
 
-/* ── Auto Scroll Engine (Section by section) ───── */
-var autoScrollTimer = null;
+/* ── Smooth Slow Continuous Auto Scroll Engine ───── */
 var isAutoScrollPaused = false;
-var currentSectionIndex = 0;
+var scrollSpeed = 0.55; // Pixels per frame (~33px per second for a relaxing, cinematic pace)
+var autoScrollRaf = null;
 
-function getSections() {
-  var hero = document.querySelector('.hero');
-  var list = [hero];
-  document.querySelectorAll('#invitation .inv-section, #invitation .inv-footer').forEach(function(sec) {
-    list.push(sec);
-  });
-  return list;
+function stepAutoScroll() {
+  if (!isAutoScrollPaused) {
+    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (window.scrollY >= maxScroll - 2) {
+      // Reached the end: pause gently for 3 seconds then smooth scroll back to top to loop
+      isAutoScrollPaused = true;
+      setTimeout(function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(function() {
+          isAutoScrollPaused = false;
+          autoScrollRaf = requestAnimationFrame(stepAutoScroll);
+        }, 1500);
+      }, 3000);
+      return;
+    } else {
+      window.scrollBy(0, scrollSpeed);
+    }
+  }
+  autoScrollRaf = requestAnimationFrame(stepAutoScroll);
 }
 
 function startAutoScroll() {
-  if (autoScrollTimer) clearInterval(autoScrollTimer);
+  if (autoScrollRaf) cancelAnimationFrame(autoScrollRaf);
   createAutoScrollBadge();
-
-  // Scroll to next section every 4.5 seconds
-  autoScrollTimer = setInterval(function() {
-    if (isAutoScrollPaused) return;
-
-    var sections = getSections();
-    if (!sections.length) return;
-
-    currentSectionIndex++;
-    if (currentSectionIndex >= sections.length) {
-      currentSectionIndex = 0; // Loop back or stop
-    }
-
-    var target = sections[currentSectionIndex];
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, 4800);
+  // Small initial pause on the hero screen so the user can take it in first
+  setTimeout(function() {
+    autoScrollRaf = requestAnimationFrame(stepAutoScroll);
+  }, 1800);
 }
 
 function createAutoScrollBadge() {
@@ -987,37 +991,23 @@ function createAutoScrollBadge() {
   badge.innerHTML = '<span class="autoscroll-dot"></span><span id="auto-scroll-text">Auto Scroll ON</span>';
   badge.onclick = function() {
     isAutoScrollPaused = !isAutoScrollPaused;
-    var txt = document.getElementById('auto-scroll-text');
-    if (isAutoScrollPaused) {
-      badge.classList.add('paused');
-      txt.textContent = 'Auto Scroll PAUSED';
-    } else {
-      badge.classList.remove('paused');
-      txt.textContent = 'Auto Scroll ON';
-    }
+    updateBadgeUI(isAutoScrollPaused);
   };
 
-  // Pause on manual user scroll/interaction, resume after 6s idle
+  // Pause on user manual interaction, resume gently after 4s idle
   var resumeTimeout;
-  window.addEventListener('wheel', function() {
+  function handleManualInteraction() {
     isAutoScrollPaused = true;
     updateBadgeUI(true);
     clearTimeout(resumeTimeout);
     resumeTimeout = setTimeout(function() {
       isAutoScrollPaused = false;
       updateBadgeUI(false);
-    }, 6000);
-  }, { passive: true });
+    }, 4500);
+  }
 
-  window.addEventListener('touchstart', function() {
-    isAutoScrollPaused = true;
-    updateBadgeUI(true);
-    clearTimeout(resumeTimeout);
-    resumeTimeout = setTimeout(function() {
-      isAutoScrollPaused = false;
-      updateBadgeUI(false);
-    }, 6000);
-  }, { passive: true });
+  window.addEventListener('wheel', handleManualInteraction, { passive: true });
+  window.addEventListener('touchstart', handleManualInteraction, { passive: true });
 
   document.body.appendChild(badge);
 }
