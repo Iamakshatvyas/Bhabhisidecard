@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Invitation – Molshree &amp; Aditya</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:    #c85a7a;
+      --pink-lt: #e08aaa;
+      --gold:    #8a7a50;
+      --gold-lt: #b5a470;
+      --cream:   #fdf8f0;
+      --warm:    #5a4a38;
+      --warm-lt: rgba(90,74,56,0.72);
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: #e8dfd3;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      padding: 36px 12px 48px;
+    }
+
+    /* ── Shell ─────────────────────────────────────────────────── */
+    .card-shell {
+      width: 100%;
+      max-width: 700px;
+      display: grid;
+      grid-template-columns: 130px 1fr 130px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.24), 0 6px 20px rgba(0,0,0,0.10);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    @media (max-width: 580px) { .card-shell { grid-template-columns: 72px 1fr 72px; } }
+    @media (max-width: 400px) { .card-shell { grid-template-columns: 50px 1fr 50px; } }
+
+    /* ── Floral borders ─────────────────────────────────────────── */
+    .floral-left, .floral-right {
+      background-image: url('floral-bg.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    .floral-left  { background-position: right center; }
+    .floral-right { background-position: left center; transform: scaleX(-1); }
+    .floral-left::after {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(to left, rgba(253,248,240,0.5) 0%, transparent 55%);
+    }
+    .floral-right::after {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(to right, rgba(253,248,240,0.5) 0%, transparent 55%);
+    }
+
+    /* ── Card body ──────────────────────────────────────────────── */
+    .card-body {
+      background: var(--cream);
+      padding: 40px 26px 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ── Ornament row ───────────────────────────────────────────── */
+    .orn-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0;
+    }
+    .orn-line      { flex:1; height:1px; background:linear-gradient(to right,transparent,rgba(138,122,80,0.38)); }
+    .orn-line.rev  { background:linear-gradient(to left,transparent,rgba(138,122,80,0.38)); }
+    .orn-diamond   { width:7px;height:7px;background:var(--gold);transform:rotate(45deg);opacity:.65;flex-shrink:0; }
+    .orn-diamond.s { width:4px;height:4px;opacity:.4; }
+
+    /* ── EVENT INFO label ───────────────────────────────────────── */
+    .ev-label {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.6rem,2vw,0.8rem);
+      letter-spacing: 0.32em;
+      color: var(--pink);
+      font-weight: 600;
+      margin: 22px 0 20px;
+    }
+
+    /* ── Family row ─────────────────────────────────────────────── */
+    .family-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      width: 100%;
+      margin-bottom: 22px;
+    }
+    .f-col { padding: 0 10px; }
+    .f-col:first-child { text-align:right; }
+    .f-col:last-child  { text-align:left; }
+    .f-title {
+      display:block;
+      font-size: clamp(0.6rem,1.7vw,0.72rem);
+      color: var(--warm-lt);
+      letter-spacing:.04em;
+      margin-bottom:3px;
+    }
+    .f-name {
+      display:block;
+      font-size: clamp(0.68rem,1.9vw,0.82rem);
+      color: var(--pink);
+      font-weight: 600;
+      line-height: 1.55;
+    }
+    .f-divider {
+      width: 1px;
+      background: rgba(138,122,80,0.28);
+      margin: 2px 6px;
+      align-self: stretch;
+    }
+
+    /* ── Announce ───────────────────────────────────────────────── */
+    .announce {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.55rem,1.7vw,0.68rem);
+      letter-spacing: 0.14em;
+      color: var(--warm);
+      line-height: 2;
+      margin-bottom: 20px;
+    }
+
+    /* ── Thin rule ──────────────────────────────────────────────── */
+    .rule {
+      width:55%; height:1px; margin:0 auto;
+      background:linear-gradient(to right,transparent,rgba(138,122,80,0.32),transparent);
+    }
+
+    /* ── Script names ───────────────────────────────────────────── */
+    .script {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem,6.5vw,3rem);
+      color: var(--pink);
+      line-height: 1.2;
+      margin: 16px 0 2px;
+    }
+    .role {
+      display:block;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.5rem,1.4vw,0.62rem);
+      letter-spacing:.28em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .amp {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.4rem,4.5vw,2rem);
+      color: var(--pink-lt);
+      display:block;
+      margin: 6px 0;
+      line-height:1;
+    }
+
+    /* ── Section divider with text ──────────────────────────────── */
+    .section-divider {
+      display:flex; align-items:center; gap:10px;
+      width:100%; margin: 28px 0 0;
+    }
+    .section-divider .sd-line {
+      flex:1; height:1px;
+      background:linear-gradient(to right,transparent,rgba(138,122,80,0.3),transparent);
+    }
+    .section-divider .sd-icon { font-size:1rem; color:var(--pink-lt); flex-shrink:0; }
+
+    /* ── Events grid ────────────────────────────────────────────── */
+    .events-grid {
+      width:100%;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Single event card */
+    .ev-card {
+      border: 1px solid rgba(200,90,122,0.18);
+      border-radius: 6px;
+      padding: 16px 18px 18px;
+      background: rgba(255,255,255,0.55);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Colour-coded left accent bar */
+    .ev-card::before {
+      content:''; position:absolute;
+      left:0; top:0; bottom:0; width:3px;
+    }
+    .ev-card.haldi::before   { background: linear-gradient(to bottom, #f5c518, #e8a020); }
+    .ev-card.mehndi::before  { background: linear-gradient(to bottom, #5a9e40, #3d7a28); }
+    .ev-card.sangeet::before { background: linear-gradient(to bottom, #c85a7a, #9e3060); }
+    .ev-card.wedding::before { background: linear-gradient(to bottom, #8a7a50, #5a4a2a); }
+
+    .ev-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .ev-name-wrap { text-align:left; }
+    .ev-icon { font-size:1.4rem; flex-shrink:0; margin-top:2px; }
+
+    .ev-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.65rem,2vw,0.78rem);
+      letter-spacing:.16em;
+      color: var(--warm);
+      font-weight: 600;
+      display:block;
+      margin-bottom:2px;
+    }
+    .ev-sub {
+      font-size: clamp(0.6rem,1.7vw,0.7rem);
+      color: var(--warm-lt);
+      font-style: italic;
+      display:block;
+    }
+
+    /* Date row inside each card */
+    .ev-date-row {
+      display: grid;
+      grid-template-columns: auto 1px auto;
+      align-items: center;
+      gap: 14px;
+      margin-top: 4px;
+    }
+    .ev-date-row .vbar {
+      width:1px; height:40px;
+      background: rgba(200,90,122,0.25);
+      align-self: center;
+    }
+    .ev-time-block { text-align:left; }
+    .ev-time {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(0.65rem,1.8vw,0.78rem);
+      color:var(--warm-lt);
+      letter-spacing:.06em;
+      display:block;
+    }
+    .ev-day {
+      font-family:'Cinzel',serif;
+      font-size:clamp(0.55rem,1.5vw,0.65rem);
+      letter-spacing:.14em;
+      color:var(--gold);
+      display:block;
+      margin-top:2px;
+    }
+    .ev-date-block { text-align:right; }
+    .ev-date-num {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.2rem,7vw,3.2rem);
+      color:var(--pink);
+      font-weight:300;
+      line-height:1;
+      display:block;
+    }
+    .ev-date-month {
+      font-family:'Cinzel',serif;
+      font-size:clamp(0.5rem,1.4vw,0.62rem);
+      letter-spacing:.14em;
+      color:var(--warm);
+      display:block;
+    }
+    .ev-date-year {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(0.62rem,1.7vw,0.75rem);
+      color:var(--warm-lt);
+      display:block;
+    }
+
+    /* Venue inside card */
+    .ev-venue {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(138,122,80,0.14);
+      font-size: clamp(0.62rem,1.7vw,0.74rem);
+      color: var(--warm-lt);
+      font-style: italic;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    /* ── Bottom ornament ────────────────────────────────────────── */
+    .bottom-orn { margin-top:30px; }
+
+    @media print {
+      body { background:#fff; padding:0; }
+      .card-shell { box-shadow:none; max-width:100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card-shell">
+
+  <!-- Left floral border -->
+  <div class="floral-left"></div>
+
+  <!-- ══ CARD BODY ══════════════════════════════════════════════ -->
+  <div class="card-body">
+
+    <!-- Top ornament -->
+    <div class="orn-row">
+      <div class="orn-line rev"></div>
+      <div class="orn-diamond s"></div>
+      <div class="orn-diamond"></div>
+      <div class="orn-diamond s"></div>
+      <div class="orn-line"></div>
+    </div>
+
+    <!-- EVENT INFO -->
+    <div class="ev-label">EVENT INFO</div>
+
+    <!-- Family names -->
+    <div class="family-row">
+      <div class="f-col">
+        <span class="f-title">Dr. &amp; Mrs.</span>
+        <span class="f-name">Anand Purohit<br/>Archna Purohit</span>
+      </div>
+      <div class="f-divider"></div>
+      <div class="f-col">
+        <span class="f-title">Mr. &amp; Mrs.</span>
+        <span class="f-name">Rajesh Vyas<br/>Sangeeta Vyas</span>
+      </div>
+    </div>
+
+    <!-- Announcement -->
+    <p class="announce">
+      WE JOYFULLY ANNOUNCE<br/>
+      THE WEDDING OF OUR CHILDREN
+    </p>
+
+    <div class="rule"></div>
+
+    <!-- Bride -->
+    <div class="script">Molshree Purohit</div>
+    <span class="role">BRIDE</span>
+
+    <span class="amp">&amp;</span>
+
+    <!-- Groom -->
+    <div class="script">Aditya Vyas</div>
+    <span class="role">GROOM</span>
+
+    <!-- Section divider -->
+    <div class="section-divider">
+      <div class="sd-line"></div>
+      <span class="sd-icon">✦</span>
+      <div class="sd-line"></div>
+    </div>
+
+    <!-- ── EVENTS ─────────────────────────────────────────────── -->
+    <div class="events-grid">
+
+      <!-- 1. Haldi -->
+      <div class="ev-card haldi">
+        <div class="ev-header">
+          <div class="ev-name-wrap">
+            <span class="ev-name">HALDI CEREMONY</span>
+            <span class="ev-sub">Blessing with turmeric &amp; joy</span>
+          </div>
+          <span class="ev-icon">🌼</span>
+        </div>
+        <div class="ev-date-row">
+          <div class="ev-time-block">
+            <span class="ev-time">AT 11:00 AM</span>
+            <span class="ev-day">THURSDAY</span>
+          </div>
+          <div class="vbar"></div>
+          <div class="ev-date-block">
+            <span class="ev-date-num">19</span>
+            <span class="ev-date-month">NOVEMBER</span>
+            <span class="ev-date-year">2026</span>
+          </div>
+        </div>
+        <div class="ev-venue">📍 Bride's Residence, Jodhpur</div>
+      </div>
+
+      <!-- 2. Mehndi -->
+      <div class="ev-card mehndi">
+        <div class="ev-header">
+          <div class="ev-name-wrap">
+            <span class="ev-name">MEHNDI CEREMONY</span>
+            <span class="ev-sub">An evening of henna &amp; celebration</span>
+          </div>
+          <span class="ev-icon">🌿</span>
+        </div>
+        <div class="ev-date-row">
+          <div class="ev-time-block">
+            <span class="ev-time">AT 1:00 PM</span>
+            <span class="ev-day">THURSDAY</span>
+          </div>
+          <div class="vbar"></div>
+          <div class="ev-date-block">
+            <span class="ev-date-num">19</span>
+            <span class="ev-date-month">NOVEMBER</span>
+            <span class="ev-date-year">2026</span>
+          </div>
+        </div>
+        <div class="ev-venue">📍 Indraprastha Resort, Jodhpur</div>
+      </div>
+
+      <!-- 3. Sangeet -->
+      <div class="ev-card sangeet">
+        <div class="ev-header">
+          <div class="ev-name-wrap">
+            <span class="ev-name">SANGEET NIGHT</span>
+            <span class="ev-sub">Music, dance &amp; merriment</span>
+          </div>
+          <span class="ev-icon">🎶</span>
+        </div>
+        <div class="ev-date-row">
+          <div class="ev-time-block">
+            <span class="ev-time">AT 7:00 PM</span>
+            <span class="ev-day">THURSDAY</span>
+          </div>
+          <div class="vbar"></div>
+          <div class="ev-date-block">
+            <span class="ev-date-num">19</span>
+            <span class="ev-date-month">NOVEMBER</span>
+            <span class="ev-date-year">2026</span>
+          </div>
+        </div>
+        <div class="ev-venue">📍 Indraprastha Resort, Jodhpur</div>
+      </div>
+
+      <!-- 4. Wedding -->
+      <div class="ev-card wedding">
+        <div class="ev-header">
+          <div class="ev-name-wrap">
+            <span class="ev-name">WEDDING CEREMONY</span>
+            <span class="ev-sub">The grand celebration of union</span>
+          </div>
+          <span class="ev-icon">💍</span>
+        </div>
+        <div class="ev-date-row">
+          <div class="ev-time-block">
+            <span class="ev-time">AT 7:30 PM</span>
+            <span class="ev-day">FRIDAY</span>
+          </div>
+          <div class="vbar"></div>
+          <div class="ev-date-block">
+            <span class="ev-date-num">20</span>
+            <span class="ev-date-month">NOVEMBER</span>
+            <span class="ev-date-year">2026</span>
+          </div>
+        </div>
+        <div class="ev-venue">📍 Indraprastha Resort, Near Veetrag Apartments,<br/>Dali Bai Circle, Jodhpur</div>
+      </div>
+
+    </div><!-- /.events-grid -->
+
+    <!-- Bottom ornament -->
+    <div class="orn-row bottom-orn">
+      <div class="orn-line rev"></div>
+      <div class="orn-diamond s"></div>
+      <div class="orn-diamond"></div>
+      <div class="orn-diamond s"></div>
+      <div class="orn-line"></div>
+    </div>
+
+  </div><!-- /.card-body -->
+
+  <!-- Right floral border -->
+  <div class="floral-right"></div>
+
+</div>
+
+</body>
+</html>
