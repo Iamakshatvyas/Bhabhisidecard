@@ -222,26 +222,36 @@
     background:linear-gradient(180deg, var(--cream) 0%, var(--cream-dk) 100%);
   }
 
-  /* ── BAND DIVIDER (EXPANDED GAP BETWEEN SECTIONS) ─── */
+  /* ── BAND DIVIDER (SEAMLESS CONTINUOUS BACKGROUND) ── */
   .band {
-    height:6px;
-    margin:40px 0;
-    background:linear-gradient(to right,transparent,var(--pink-lt),var(--gold-lt),var(--pink-lt),transparent);
+    height:36px;
+    margin:0;
+    background:var(--cream);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .band::after {
+    content:'❦';
+    font-size:1.1rem;
+    color:var(--gold-lt);
+    opacity:0.4;
   }
 
   /* ── SECTION PRESENTATION & SPACED LAYOUT ──────────── */
   .inv-section {
     background:var(--cream);
-    padding:110px 24px;
+    padding:90px 24px;
     min-height:95vh;
     display:flex;
     align-items:center;
     justify-content:center;
     position:relative;
     overflow:hidden;
-    margin:20px 0;
+    margin:0;
   }
-  .inv-section.alt { background:var(--cream-dk); }
+  .inv-section.alt { background:var(--cream); }
 
   .inv-section .inner {
     position:relative; z-index:1;
@@ -448,88 +458,7 @@
   }
   .map-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(138,122,80,.48); }
 
-  /* ── AUTO SCROLL CONTROLS ───────────────────────────── */
-  .autoscroll-badge {
-    position:fixed;
-    bottom:24px;
-    right:24px;
-    z-index:99;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:rgba(253,248,242,0.92);
-    border:1px solid var(--border);
-    padding:10px 18px;
-    border-radius:9999px;
-    box-shadow:0 6px 24px rgba(80,40,20,0.18);
-    backdrop-filter:blur(6px);
-    font-family:'Cinzel',serif;
-    font-size:.65rem;
-    letter-spacing:.15em;
-    color:var(--warm);
-    cursor:pointer;
-    user-select:none;
-    transition:all .25s ease;
-  }
-  .autoscroll-badge:hover {
-    transform:translateY(-2px);
-    box-shadow:0 8px 28px rgba(80,40,20,0.25);
-    border-color:var(--pink);
-  }
-  .autoscroll-dot {
-    width:8px; height:8px;
-    border-radius:50%;
-    background:#22c55e;
-    box-shadow:0 0 8px rgba(34,197,94,0.6);
-    animation:pulseDot 1.8s infinite;
-  }
-  .autoscroll-badge.paused .autoscroll-dot {
-    background:#eab308;
-    box-shadow:none;
-    animation:none;
-  }
-  @keyframes pulseDot {
-    0%,100% { opacity:1; transform:scale(1); }
-    50% { opacity:.5; transform:scale(1.3); }
-  }
 
-  /* ── RSVP ──────────────────────────────────────────── */
-  .rsvp-form { display:flex; flex-direction:column; gap:12px; text-align:left; }
-  .rsvp-form label {
-    font-family:'Cinzel',serif; font-size:.58rem;
-    letter-spacing:.18em; color:var(--gold); display:block; margin-bottom:4px;
-  }
-  .rsvp-form input,
-  .rsvp-form select,
-  .rsvp-form textarea {
-    width:100%; padding:12px 16px;
-    border:1px solid var(--border); border-radius:8px;
-    background:rgba(255,255,255,.7); font-family:'Cormorant Garamond',serif;
-    font-size:1rem; color:var(--warm); outline:none;
-    transition:border-color .2s;
-  }
-  .rsvp-form input:focus,
-  .rsvp-form select:focus,
-  .rsvp-form textarea:focus { border-color:var(--pink); }
-  .rsvp-form textarea { min-height:88px; resize:vertical; }
-  .rsvp-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  @media(max-width:420px){ .rsvp-row { grid-template-columns:1fr; } }
-  .rsvp-submit {
-    padding:13px; border-radius:9999px; background:var(--pink);
-    color:#fff; font-family:'Cinzel',serif; font-size:.7rem;
-    letter-spacing:.2em; font-weight:500; border:none; cursor:pointer;
-    box-shadow:0 4px 14px rgba(200,90,122,.32);
-    transition:transform .15s,box-shadow .15s; margin-top:4px;
-  }
-  .rsvp-submit:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(200,90,122,.45); }
-
-  .rsvp-ok {
-    display:none; text-align:center; padding:28px 0;
-    animation:fadeUp .5s ease;
-  }
-  .rsvp-ok .big { font-size:2.4rem; margin-bottom:8px; }
-  .rsvp-ok h3  { font-family:'Great Vibes',cursive; font-size:2rem; color:var(--pink); margin-bottom:8px; }
-  .rsvp-ok p   { color:var(--warm-lt); font-style:italic; }
 
   /* ── GUESTBOOK ─────────────────────────────────────── */
   .wish-list { margin-bottom:24px; display:flex; flex-direction:column; gap:12px; }
@@ -948,81 +877,72 @@
 })();
 
 /* ── Smooth Slow Continuous Auto Scroll Engine ───── */
+/* ── Reliable Smooth Auto Scroll Engine (No Button) ── */
 var isAutoScrollPaused = false;
-var scrollSpeed = 0.55; // Pixels per frame (~33px per second for a relaxing, cinematic pace)
-var autoScrollRaf = null;
+var scrollAccumulator = 0;
+var scrollSpeed = 0.75; // Smooth cinematic progression
+var autoScrollId = null;
 
 function stepAutoScroll() {
   if (!isAutoScrollPaused) {
-    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    if (window.scrollY >= maxScroll - 2) {
-      // Reached the end: pause gently for 3 seconds then smooth scroll back to top to loop
+    var maxScroll = Math.max(
+      document.body.scrollHeight, document.documentElement.scrollHeight,
+      document.body.offsetHeight, document.documentElement.offsetHeight,
+      document.body.clientHeight, document.documentElement.clientHeight
+    ) - window.innerHeight;
+
+    var currentY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    if (currentY >= maxScroll - 4) {
+      // Reached bottom: pause 4 seconds, smooth scroll back to top, and loop
       isAutoScrollPaused = true;
       setTimeout(function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(function() {
           isAutoScrollPaused = false;
-          autoScrollRaf = requestAnimationFrame(stepAutoScroll);
-        }, 1500);
-      }, 3000);
+          autoScrollId = requestAnimationFrame(stepAutoScroll);
+        }, 1800);
+      }, 4000);
       return;
     } else {
-      window.scrollBy(0, scrollSpeed);
+      scrollAccumulator += scrollSpeed;
+      if (scrollAccumulator >= 1) {
+        var step = Math.floor(scrollAccumulator);
+        scrollAccumulator -= step;
+        window.scrollBy(0, step);
+      }
     }
   }
-  autoScrollRaf = requestAnimationFrame(stepAutoScroll);
+  autoScrollId = requestAnimationFrame(stepAutoScroll);
 }
 
 function startAutoScroll() {
-  if (autoScrollRaf) cancelAnimationFrame(autoScrollRaf);
-  createAutoScrollBadge();
-  // Small initial pause on the hero screen so the user can take it in first
-  setTimeout(function() {
-    autoScrollRaf = requestAnimationFrame(stepAutoScroll);
-  }, 1800);
-}
+  if (autoScrollId) cancelAnimationFrame(autoScrollId);
 
-function createAutoScrollBadge() {
-  if (document.getElementById('auto-scroll-btn')) return;
-
-  var badge = document.createElement('div');
-  badge.id = 'auto-scroll-btn';
-  badge.className = 'autoscroll-badge';
-  badge.innerHTML = '<span class="autoscroll-dot"></span><span id="auto-scroll-text">Auto Scroll ON</span>';
-  badge.onclick = function() {
-    isAutoScrollPaused = !isAutoScrollPaused;
-    updateBadgeUI(isAutoScrollPaused);
-  };
-
-  // Pause on user manual interaction, resume gently after 4s idle
-  var resumeTimeout;
-  function handleManualInteraction() {
+  // Pause on manual user scrolling or touch, resume gently after 4s
+  var userScrollTimeout;
+  function onUserTouchOrScroll() {
     isAutoScrollPaused = true;
-    updateBadgeUI(true);
-    clearTimeout(resumeTimeout);
-    resumeTimeout = setTimeout(function() {
+    clearTimeout(userScrollTimeout);
+    userScrollTimeout = setTimeout(function() {
       isAutoScrollPaused = false;
-      updateBadgeUI(false);
     }, 4500);
   }
 
-  window.addEventListener('wheel', handleManualInteraction, { passive: true });
-  window.addEventListener('touchstart', handleManualInteraction, { passive: true });
+  window.addEventListener('wheel', onUserTouchOrScroll, { passive: true });
+  window.addEventListener('touchstart', onUserTouchOrScroll, { passive: true });
+  window.addEventListener('touchmove', onUserTouchOrScroll, { passive: true });
+  window.addEventListener('keydown', function(e) {
+    if ([32, 33, 34, 38, 40].indexOf(e.keyCode) > -1) {
+      onUserTouchOrScroll();
+    }
+  });
 
-  document.body.appendChild(badge);
-}
-
-function updateBadgeUI(paused) {
-  var badge = document.getElementById('auto-scroll-btn');
-  var txt = document.getElementById('auto-scroll-text');
-  if (!badge || !txt) return;
-  if (paused) {
-    badge.classList.add('paused');
-    txt.textContent = 'Auto Scroll PAUSED';
-  } else {
-    badge.classList.remove('paused');
-    txt.textContent = 'Auto Scroll ON';
-  }
+  // Allow guest to enjoy the opening hero view first, then begin scrolling
+  setTimeout(function() {
+    isAutoScrollPaused = false;
+    autoScrollId = requestAnimationFrame(stepAutoScroll);
+  }, 2200);
 }
 
 /* ── Open animation ──────────────────────────────── */
