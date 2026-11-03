@@ -171,45 +171,20 @@
   .hero {
     position:relative;
     background:var(--cream);
-    overflow:visible;
-    display:grid;
-    grid-template-columns: 200px 1fr 200px;
-    min-height:480px;
+    display:flex;
+    justify-content:center;
     align-items:center;
+    min-height:480px;
   }
-  @media(max-width:640px){ .hero { grid-template-columns:110px 1fr 110px; min-height:360px; } }
-  @media(max-width:400px){ .hero { grid-template-columns:70px 1fr 70px; } }
-
-  /* Floral side panels - mix-blend-mode makes white areas transparent */
-  .hero-floral {
-    align-self:stretch;
-    background:url('floral-bg.jpg') center/cover no-repeat;
-    mix-blend-mode:multiply;
-    position:relative;
-    z-index:2;
-  }
-  .hero-floral.left  { background-position:right center; }
-  .hero-floral.right { background-position:left center; transform:scaleX(-1); }
-
-  /* Extend flowers OVER the cream center using ::after pseudo */
-  .hero-floral.left::after,
-  .hero-floral.right::after {
-    content:'';
-    position:absolute; top:0; bottom:0;
-    width:60px;
-    background:inherit;
-    background-position:right center;
-    mix-blend-mode:multiply;
-    z-index:3;
-  }
-  .hero-floral.left::after  { right:-50px; background-position:right center; }
-  .hero-floral.right::after { left:-50px;  background-position:left center; transform:scaleX(-1); }
+  @media(max-width:640px){ .hero { min-height:360px; } }
 
   /* Center hero content */
   .hero-content {
     position:relative; z-index:4;
     text-align:center;
-    padding:60px 16px 54px;
+    padding:60px 20px 54px;
+    max-width:680px;
+    width:100%;
   }
   .hero-pre {
     font-family:'Cinzel',serif;
@@ -259,24 +234,6 @@
   }
   .inv-section.alt { background:var(--cream-dk); }
 
-  /* Subtle corner florals on sections */
-  .inv-section::before {
-    content:'';
-    position:absolute; top:-20px; left:-30px;
-    width:180px; height:220px;
-    background:url('floral-bg.jpg') right center/300px no-repeat;
-    mix-blend-mode:multiply;
-    opacity:.35; pointer-events:none; z-index:0;
-  }
-  .inv-section::after {
-    content:'';
-    position:absolute; bottom:-20px; right:-30px;
-    width:180px; height:220px;
-    background:url('floral-bg.jpg') left center/300px no-repeat;
-    mix-blend-mode:multiply;
-    opacity:.35; pointer-events:none; z-index:0;
-    transform:scaleX(-1) scaleY(-1);
-  }
   .inv-section .inner {
     position:relative; z-index:1;
     max-width:640px; margin:0 auto;
@@ -541,12 +498,6 @@
     background:var(--cream-dk); padding:56px 20px 44px;
     text-align:center; position:relative; overflow:hidden;
   }
-  .inv-footer::before {
-    content:'';
-    position:absolute; inset:0;
-    background:url('floral-bg.jpg') center/cover;
-    mix-blend-mode:multiply; opacity:.18; pointer-events:none;
-  }
   .inv-footer .inner { position:relative; z-index:1; }
   .footer-names {
     font-family:'Great Vibes',cursive;
@@ -633,7 +584,6 @@
   <!-- ── HERO ─────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero-page-bg"></div>
-    <div class="hero-floral left"></div>
 
     <div class="hero-content">
       <span class="hero-pre">WEDDING INVITATION</span>
@@ -653,8 +603,6 @@
         their wedding
       </p>
     </div>
-
-    <div class="hero-floral right"></div>
   </section>
 
   <div class="band"></div>
